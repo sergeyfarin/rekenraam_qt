@@ -1,5 +1,5 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-# import org_chart_from_exchange.old.profor_well_create
+# noinspection PyUnresolvedReferences
 import ribbon_ui
 import os
 
