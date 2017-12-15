@@ -14,9 +14,21 @@ class MainWindow(QtWidgets.QMainWindow):
             version_file.close()
         else:
             self.version = ""
-        self.setWindowTitle("Fireweed "+self.version)
+        self.setWindowTitle("Rekenraam "+self.version)
 
-        # self.setStyleSheet("""background-color:blue;""")
+        self.setStyleSheet("""QWidget { background: #CCCCCC; }""")
+
+        self.main_layout = QtWidgets.QHBoxLayout()
+        self.left_pane = QtWidgets.QWidget()
+        self.left_pane.setFixedWidth(300)
+        self.left_pane.setMinimumHeight(200)
+        self.left_pane.setStyleSheet("""QWidget { background: #EBEDEF; }""")
+
+        self.right_layout = QtWidgets.QVBoxLayout()
+        self.main_layout.addWidget(self.left_pane)
+        self.main_layout.addLayout(self.right_layout)
+
+
 
         self.mdi_area = QtWidgets.QMdiArea()
         self.mdi_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
@@ -35,13 +47,15 @@ class MainWindow(QtWidgets.QMainWindow):
         # noinspection PyUnresolvedReferences
         self.windowMapper.mapped.connect(self.set_active_sub_window)
 
-        main_window_layout = QtWidgets.QGridLayout()
+        main_window_layout = QtWidgets.QVBoxLayout()
         main_window_layout.setSpacing(0)
         main_window_layout.setContentsMargins(0, 0, 0, 0)
         self.ribbon = ribbon_ui.Ribbon(self)
         main_window_layout.addItem(QtWidgets.QSpacerItem(0, 5))
         main_window_layout.addWidget(self.ribbon)
-        main_window_layout.addWidget(self.mdi_area)
+        main_window_layout.addLayout(self.main_layout)
+        self.main_layout.addWidget(self.mdi_area)
+
 
         self.newWellProductionPlot = QtWidgets.QToolButton()
         self.newWellProductionPlot.setText("New well plot")
