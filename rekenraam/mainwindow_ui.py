@@ -18,15 +18,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setStyleSheet(
             """
-            QFrame#Ribbon 
+            QWidget#Ribbon 
                 {background: 
                     qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);
-                };
-            VLine
-                {background:
-                    qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFFFF, stop: 0.5 #FFFFFF00, stop: 1.0 #FFFFFF00);
-                };
-            """)  # stop: 0.5 #EAEDF1,
+                }
+            QWidget#LeftPane 
+                {background: 
+                    qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #81C784, stop: 0.35 #81C784, stop: 1.0 #81C784);
+                }
+            QWidget#StatusBar {background: #1B5E20;}
+            """)
 
         main_window_layout = QtWidgets.QVBoxLayout()
         main_window_layout.setSpacing(0)
@@ -34,45 +35,39 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.ribbon = ribbon_ui.Ribbon(self)
 
+        self.home_tab = self.ribbon.add_tab("Home")
+        self.extras_tab = self.ribbon.add_tab("Extras")
+        self.home_tab.home_button = self.home_tab.add_button("Home", "Overview", "images/icons/color/icons8-home.png")
+        self.extras_tab.home_button2 = self.extras_tab.add_button("Home2", "Overview", "images/icons/color/icons8-home.png")
+        self.home_button3 = self.home_tab.add_button("Home3", "Overview", "images/icons/color/icons8-home.png")
+        self.investments_tab = self.ribbon.add_tab("Investments")
+
         main_window_layout.addWidget(self.ribbon)
 
         main_layout = QtWidgets.QHBoxLayout()
-        left_pane = QtWidgets.QWidget()
+        self.left_pane = QtWidgets.QWidget()
 
-
-        left_pane.setFixedWidth(300)
-        left_pane.setMinimumHeight(200)
+        self.left_pane.setFixedWidth(300)
+        self.left_pane.setMinimumHeight(200)
         # self.left_pane.setStyleSheet("""background: #EBEDEF;""")
-        left_pane.setObjectName("LeftPane")
-        left_pane.setStyleSheet(
-            "QWidget#LeftPane {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #81C784, stop: 0.35 #81C784, stop: 1.0 #81C784);}")  # stop: 0.5 #FFFFFF,
+        self.left_pane.setObjectName("LeftPane")
+        # left_pane.setStyleSheet(
 
         self.right_layout = QtWidgets.QVBoxLayout()
-        main_layout.addWidget(left_pane)
+        main_layout.addWidget(self.left_pane)
         main_layout.addLayout(self.right_layout)
 
         main_window_layout.addLayout(main_layout)
 
-        self.mdi_area = QtWidgets.QWidget()
-        # self.mdi_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        # self.mdi_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.mdi_area.setStyleSheet("background: #FFFFFF")
-
-        # noinspection PyUnresolvedReferences
-        # self.mdi_area.subWindowActivated.connect(self.update_menus)
-        # self.mdi_area.setViewMode(QtWidgets.QMdiArea.TabbedView)
-        #
-        # self.mdi_area.setTabsClosable(True)
-        # self.mdi_area.setTabsMovable(True)
-        # self.mdi_area.setDocumentMode(True)
-        # self.mdi_area.setTabShape(QtWidgets.QTabWidget.Rounded)
+        self.main_area = QtWidgets.QWidget()
+        self.main_area.setStyleSheet("background: #FFFFFF")
 
         self.windowMapper = QtCore.QSignalMapper(self)
         # noinspection PyUnresolvedReferences
         self.windowMapper.mapped.connect(self.set_active_sub_window)
 
 
-        main_layout.addWidget(self.mdi_area)
+        main_layout.addWidget(self.main_area)
 
         central = QtWidgets.QWidget()
         central.setLayout(main_window_layout)
@@ -85,19 +80,6 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.setStyleSheet("file-icon: url(images/icons/chart_line_reversed.png);")
         self.statusBar().showMessage("Ready")
         self.statusBar().setObjectName("StatusBar")
-        self.statusBar().setStyleSheet(
-            "QWidget#StatusBar {background: #1B5E20;}")  # stop: 0.5 #FFFFFF,
-
-        # QStatusBar
-        # {
-        #     background: qlineargradient(
-        #         x1: 0, y1: 0, x2: 0, y2: 1, stop: 0  # E6EAEE, stop: 0.75 #C4C9CE, stop: 1.0 #B7BCC1);
-        # }
-
-        # self.setStyleSheet("""
-        # QTabBar {
-        #     background-color: #F0F0F0;
-        #     }""")
         self.show()
 
     def about(self):
@@ -123,7 +105,7 @@ class MainWindow(QtWidgets.QMainWindow):
         pass
 
     def update_view_menu(self, add):
-        windows = self.mdi_area.subWindowList()
+        windows = self.main_area.subWindowList()
         if len(windows)+add > 0:
             self.ribbon.cascade_button.setDisabled(False)
             self.ribbon.expand_button.setDisabled(False)
@@ -183,23 +165,23 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.dialogue.show()
 
     def active_mdi_child(self):
-        active_sub_window = self.mdi_area.activeSubWindow()
+        active_sub_window = self.main_area.activeSubWindow()
         if active_sub_window:
             return active_sub_window.widget()
         return None
 
     def set_active_sub_window(self, i):
         if i:
-            self.mdi_area.setActiveSubWindow(self.mdi_area.subWindowList()[i-1])
+            self.main_area.setActiveSubWindow(self.main_area.subWindowList()[i - 1])
 
     def close(self):
-        self.mdi_area.closeAllSubWindows()
+        # self.main_area.closeAllSubWindows()
         self.write_window_settings()
         import sys
         sys.exit()
 
     def closeEvent(self, *args, **kwargs):
-        self.mdi_area.closeAllSubWindows()
+        # self.main_area.closeAllSubWindows()
         self.write_window_settings()
         import sys
         sys.exit()
