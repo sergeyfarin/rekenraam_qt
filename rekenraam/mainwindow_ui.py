@@ -16,57 +16,63 @@ class MainWindow(QtWidgets.QMainWindow):
             self.version = ""
         self.setWindowTitle("Rekenraam "+self.version)
 
-        self.setStyleSheet("""QWidget { background: #CCCCCC; }""")
+        self.setStyleSheet(
+            """
+            QFrame#Ribbon 
+                {background: 
+                    qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);
+                };
+            VLine
+                {background:
+                    qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #FFFFFFFF, stop: 0.5 #FFFFFF00, stop: 1.0 #FFFFFF00);
+                };
+            """)  # stop: 0.5 #EAEDF1,
 
-        self.main_layout = QtWidgets.QHBoxLayout()
-        self.left_pane = QtWidgets.QWidget()
-        self.left_pane.setFixedWidth(300)
-        self.left_pane.setMinimumHeight(200)
-        self.left_pane.setStyleSheet("""QWidget { background: #EBEDEF; }""")
+        main_window_layout = QtWidgets.QVBoxLayout()
+        main_window_layout.setSpacing(0)
+        main_window_layout.setContentsMargins(0, 0, 0, 0)
+
+        self.ribbon = ribbon_ui.Ribbon(self)
+
+        main_window_layout.addWidget(self.ribbon)
+
+        main_layout = QtWidgets.QHBoxLayout()
+        left_pane = QtWidgets.QWidget()
+
+
+        left_pane.setFixedWidth(300)
+        left_pane.setMinimumHeight(200)
+        # self.left_pane.setStyleSheet("""background: #EBEDEF;""")
+        left_pane.setObjectName("LeftPane")
+        left_pane.setStyleSheet(
+            "QWidget#LeftPane {background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #81C784, stop: 0.35 #81C784, stop: 1.0 #81C784);}")  # stop: 0.5 #FFFFFF,
 
         self.right_layout = QtWidgets.QVBoxLayout()
-        self.main_layout.addWidget(self.left_pane)
-        self.main_layout.addLayout(self.right_layout)
+        main_layout.addWidget(left_pane)
+        main_layout.addLayout(self.right_layout)
 
+        main_window_layout.addLayout(main_layout)
 
-
-        self.mdi_area = QtWidgets.QMdiArea()
-        self.mdi_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.mdi_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.mdi_area = QtWidgets.QWidget()
+        # self.mdi_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        # self.mdi_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
+        self.mdi_area.setStyleSheet("background: #FFFFFF")
 
         # noinspection PyUnresolvedReferences
-        self.mdi_area.subWindowActivated.connect(self.update_menus)
-        self.mdi_area.setViewMode(QtWidgets.QMdiArea.TabbedView)
-
-        self.mdi_area.setTabsClosable(True)
-        self.mdi_area.setTabsMovable(True)
-        self.mdi_area.setDocumentMode(True)
-        self.mdi_area.setTabShape(QtWidgets.QTabWidget.Rounded)
+        # self.mdi_area.subWindowActivated.connect(self.update_menus)
+        # self.mdi_area.setViewMode(QtWidgets.QMdiArea.TabbedView)
+        #
+        # self.mdi_area.setTabsClosable(True)
+        # self.mdi_area.setTabsMovable(True)
+        # self.mdi_area.setDocumentMode(True)
+        # self.mdi_area.setTabShape(QtWidgets.QTabWidget.Rounded)
 
         self.windowMapper = QtCore.QSignalMapper(self)
         # noinspection PyUnresolvedReferences
         self.windowMapper.mapped.connect(self.set_active_sub_window)
 
-        main_window_layout = QtWidgets.QVBoxLayout()
-        main_window_layout.setSpacing(0)
-        main_window_layout.setContentsMargins(0, 0, 0, 0)
-        self.ribbon = ribbon_ui.Ribbon(self)
-        main_window_layout.addItem(QtWidgets.QSpacerItem(0, 5))
-        main_window_layout.addWidget(self.ribbon)
-        main_window_layout.addLayout(self.main_layout)
-        self.main_layout.addWidget(self.mdi_area)
 
-
-        self.newWellProductionPlot = QtWidgets.QToolButton()
-        self.newWellProductionPlot.setText("New well plot")
-        self.newWellProductionPlot.setStatusTip("New well plot")
-        self.newWellProductionPlot.setIcon(QtGui.QIcon("images/icons/chart_line_add.png"))
-        self.newWellProductionPlot.setIconSize(QtCore.QSize(32, 32))
-        self.newWellProductionPlot.setAutoRaise(True)
-        self.newWellProductionPlot.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
-        # noinspection PyUnresolvedReferences
-        self.newWellProductionPlot.clicked.connect(self.make_chart)
-        self.ribbon.ribbon_home_plot_area_layout.addWidget(self.newWellProductionPlot)
+        main_layout.addWidget(self.mdi_area)
 
         central = QtWidgets.QWidget()
         central.setLayout(main_window_layout)
@@ -78,6 +84,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # self.setStyleSheet("file-icon: url(images/icons/chart_line_reversed.png);")
         self.statusBar().showMessage("Ready")
+        self.statusBar().setObjectName("StatusBar")
+        self.statusBar().setStyleSheet(
+            "QWidget#StatusBar {background: #1B5E20;}")  # stop: 0.5 #FFFFFF,
+
         # QStatusBar
         # {
         #     background: qlineargradient(

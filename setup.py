@@ -72,8 +72,7 @@ if sys.platform in ['win32', 'cygwin', 'win64']:
     #             'C:\Apps\Programs\WinPython-32bit-3.4\python-3.4.2\Lib\site-packages\PyQt4\plugins\imageformats\qico4.dll',
     #             'C:\Apps\Programs\WinPython-32bit-3.4\python-3.4.2\Lib\site-packages\PyQt4\plugins\imageformats\qmng4.dll',
     #             'C:\Apps\Programs\WinPython-32bit-3.4\python-3.4.2\Lib\site-packages\PyQt4\plugins\imageformats\qsvg4.dll',
-    #             'C:\Apps\Programs\WinPython-32bit-3.4\python-3.4.2\Lib\site-packages\PyQt4\plugins\imageformats\qtiff4.dll',
-    #             'org_chart_from_exchange/gui/mainwindow_ui.qrc'
+    #             'C:\Apps\Programs\WinPython-32bit-3.4\python-3.4.2\Lib\site-packages\PyQt4\plugins\imageformats\qtiff4.dll'
     #
     #           ])
         #],
