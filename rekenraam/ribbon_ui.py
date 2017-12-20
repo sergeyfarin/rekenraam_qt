@@ -21,19 +21,47 @@ class Ribbon(QtWidgets.QFrame):
         self.ribbon_tabs.tabBar().setObjectName("RibbonTabBar")
         ribbon_layout.addWidget(self.ribbon_tabs)
         ribbon_layout.addItem(QtWidgets.QSpacerItem(0, 0))
+        # effect = Qt.QGraphicsDropShadowEffect()
+        # effect.setBlurRadius(3)
+        # effect.setXOffset(0)
+        # effect.setYOffset(2)
+        # # effect.
+        # # effect.setColor(Qt.Qt.black)
+        # self.setGraphicsEffect(effect)
 
     def add_tab(self, name):
         new_tab = RibbonTab(self, self.main_window)
         self.ribbon_tabs.addTab(new_tab, " "+name+" ")
         new_tab.layout0 = QtWidgets.QVBoxLayout()
-        new_tab.layout1 = QtWidgets.QHBoxLayout()
+        new_tab.layout0.setContentsMargins(0, 0, 0, 0)
+        new_tab.layout = QtWidgets.QHBoxLayout()
         new_tab.layout.setContentsMargins(0, 0, 0, 0)
-        new_tab.setLayout(new_tab.layout0)
-        new_tab.layout0.addItem(QtWidgets.QSpacerItem(5, 0))
-        new_tab.layout0.addLayout(new_tab.layout1)
-
+        new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 3))
+        new_tab.layout0.addLayout(new_tab.layout)
+        new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 3))
         new_tab.layout.setAlignment(Qt.Qt.AlignLeft)
+        new_tab.layout.addItem(QtWidgets.QSpacerItem(15, 0))
+        new_tab.setLayout(new_tab.layout0)
         return new_tab
+
+    def about(self):
+        about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed",
+                            """<h2>Fireweed """ + self.version + """</h2>
+                            Field, Reservoir and Well Electronic Dashboard<br><br>
+                            Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
+                            Sergey Farin</a><br><br>
+                            Powered by:
+                            <a href="https://www.python.org/">Python</a>,
+                            <a href="http://qt-project.org/wiki/PySide">PySide</a>, """ +
+                            # """<a href="http://www.riverbankcomputing.com/software/pyqt/download">PyQt</a>,"""+
+                            """<a href="http://matplotlib.org">matplotlib</a>,
+                            <a href="http://www.numpy.org">NumPy</a>,
+                            <a href="http://pandas.pydata.org">Pandas</a>,
+                            <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
+                            <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
+                            <br>""")
+
+        about_box.exec()
 
 
 class RibbonTab(QtWidgets.QWidget):
