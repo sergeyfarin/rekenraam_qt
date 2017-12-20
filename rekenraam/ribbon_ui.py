@@ -17,15 +17,21 @@ class Ribbon(QtWidgets.QFrame):
         self.setLayout(ribbon_layout)
         ribbon_layout.addItem(QtWidgets.QSpacerItem(0, 10))
         self.ribbon_tabs = QtWidgets.QTabWidget()
+        self.ribbon_tabs.setObjectName("RibbonTabs")
+        self.ribbon_tabs.tabBar().setObjectName("RibbonTabBar")
         ribbon_layout.addWidget(self.ribbon_tabs)
         ribbon_layout.addItem(QtWidgets.QSpacerItem(0, 0))
 
     def add_tab(self, name):
         new_tab = RibbonTab(self, self.main_window)
         self.ribbon_tabs.addTab(new_tab, " "+name+" ")
-        new_tab.layout = QtWidgets.QHBoxLayout()
+        new_tab.layout0 = QtWidgets.QVBoxLayout()
+        new_tab.layout1 = QtWidgets.QHBoxLayout()
         new_tab.layout.setContentsMargins(0, 0, 0, 0)
-        new_tab.setLayout(new_tab.layout)
+        new_tab.setLayout(new_tab.layout0)
+        new_tab.layout0.addItem(QtWidgets.QSpacerItem(5, 0))
+        new_tab.layout0.addLayout(new_tab.layout1)
+
         new_tab.layout.setAlignment(Qt.Qt.AlignLeft)
         return new_tab
 

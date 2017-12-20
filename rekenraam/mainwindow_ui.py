@@ -16,18 +16,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self.version = ""
         self.setWindowTitle("Rekenraam "+self.version)
 
-        self.setStyleSheet(
-            """
-            QWidget#Ribbon 
-                {background: 
-                    qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);
-                }
-            QWidget#LeftPane 
-                {background: 
-                    qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #81C784, stop: 0.35 #81C784, stop: 1.0 #81C784);
-                }
-            QWidget#StatusBar {background: #1B5E20;}
-            """)
+        for f in os.listdir('fonts'):
+            if os.path.isfile(os.path.join('fonts', f)) and f.split(sep='.')[1] == 'ttf':
+                QtGui.QFontDatabase.addApplicationFont(os.path.join('fonts', f))
+
+        if os.path.isfile('main_window.qss'):
+            with open('main_window.qss') as qss:
+                self.setStyleSheet(qss.read())
 
         main_window_layout = QtWidgets.QVBoxLayout()
         main_window_layout.setSpacing(0)

@@ -1,0 +1,40 @@
+QWidget {
+    border: 0;
+}
+QWidget#Ribbon {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);
+}
+QTabWidget::tab-bar#RibbonTabs {
+    left: 30px;
+    }
+QTabWidget::pane#RibbonTabs {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #1B5E20;
+    background: white;
+}
+QTabBar::tab#RibbonTabBar {
+    padding: 5px 15px 3px 15px;
+    border: 0px;
+}
+QTabBar::tab:!selected#RibbonTabBar {
+    background-color:#1B5E20;
+    color: white;
+}
+QTabBar::tab:hover#RibbonTabBar {
+    background-color: #43A047;
+    color: white;
+}
+QTabBar::tab:selected#RibbonTabBar {
+    background-color:white;
+    border-color:white;
+    color: black;
+}
+QWidget#LeftPane {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #81C784, stop: 0.35 #81C784, stop: 0.995 #A5D6A7, stop: 1.0 #1B5E20);
+}
+QWidget#StatusBar {
+    background-color: #1B5E20;
+    color: #81C784;
+}
