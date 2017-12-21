@@ -24,6 +24,8 @@ class MainWindow(QtWidgets.QMainWindow):
             with open('main_window.qss') as qss:
                 self.setStyleSheet(qss.read())
 
+        self.setMinimumSize(500,400)
+
         layout_for_ribbon = QtWidgets.QVBoxLayout()
         layout_for_ribbon.setSpacing(0)
         layout_for_ribbon.setContentsMargins(0, 0, 0, 0)
@@ -56,14 +58,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.investments_tab2 = self.ribbon.add_tab("Investments2")
         self.investments_tab3 = self.ribbon.add_tab("Investments3")
 
-        self.rA = QtWidgets.QLabel("svsvdds")
-        self.rA.name = 'square'
-        self.rA.resize(20, 10)
-        self.rA.move(self.width()-20, 0)
-        # print(self.home_tab.height())
-        self.rA.setStyleSheet('background-color:red;')
-        self.rA.setParent(self)
-        self.rA.show()
 
         self.left_pane.setFixedWidth(350)
         self.left_pane.setMinimumHeight(200)
@@ -82,8 +76,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.statusBar().showMessage("Ready")
         self.statusBar().setObjectName("StatusBar")
 
-        self.rA.raise_()
-
+        self.info_button.raise_()
 
         self.show()
 
@@ -140,4 +133,4 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def resizeEvent(self, *args, **kwargs):
         self.write_window_settings()
-        self.rA.move(self.width()-20, 0)
+        self.info_button.move(self.width()-32, 4)

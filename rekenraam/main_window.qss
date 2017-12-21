@@ -1,5 +1,12 @@
 QToolButton:hover {
-    color: #0D47A1;
+    color: #1B5E20;
+}
+QToolButton#InfoButton {
+    background-color: #1B5E20;
+    border: 0px;
+}
+QToolButton:hover#InfoButton {
+    background-color: #43A047;
 }
 QWidget#Ribbon {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);

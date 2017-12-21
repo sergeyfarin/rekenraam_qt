@@ -21,6 +21,24 @@ class Ribbon(QtWidgets.QFrame):
         self.ribbon_tabs.tabBar().setObjectName("RibbonTabBar")
         ribbon_layout.addWidget(self.ribbon_tabs)
         ribbon_layout.addItem(QtWidgets.QSpacerItem(0, 0))
+
+        parent.info_button = QtWidgets.QToolButton()
+        parent.info_button.setObjectName("InfoButton")
+        parent.info_button.setStatusTip("About")
+        parent.info_button.setIcon(QtGui.QIcon("images/icons/icons8-info-2.png"))
+        parent.info_button.setIconSize(QtCore.QSize(24, 24))
+        # info_button.setAutoRaise(True)
+        # info_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
+        # self.layout.addWidget(info_button)
+        parent.info_button.name = 'about'
+        parent.info_button.resize(32, 32)
+        parent.info_button.move(self.width() - 32, 4)
+        # print(self.home_tab.height())
+        # self.info_button.setStyleSheet('background-color:red;')
+        parent.info_button.setParent(parent)
+        parent.info_button.clicked.connect(self.about)
+        parent.info_button.show()
+
         # self.version = parent.version
         # self.about()
 
@@ -40,8 +58,8 @@ class Ribbon(QtWidgets.QFrame):
         return new_tab
 
     def about(self):
-        about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed",
-                            """<h2>Fireweed """ + self.version + """</h2>
+        about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """
+                            """<h2>Fireweed</h2>
                             Field, Reservoir and Well Electronic Dashboard<br><br>
                             Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
                             Sergey Farin</a><br><br>
@@ -55,6 +73,7 @@ class Ribbon(QtWidgets.QFrame):
                             <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
                             <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
                             <br>""")
+
 
         about_box.exec()
 
