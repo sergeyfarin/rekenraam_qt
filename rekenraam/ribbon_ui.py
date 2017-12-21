@@ -58,24 +58,28 @@ class Ribbon(QtWidgets.QFrame):
         return new_tab
 
     def about(self):
-        about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """
-                            """<h2>Fireweed</h2>
-                            Field, Reservoir and Well Electronic Dashboard<br><br>
-                            Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
-                            Sergey Farin</a><br><br>
-                            Powered by:
-                            <a href="https://www.python.org/">Python</a>,
-                            <a href="http://qt-project.org/wiki/PySide">PySide</a>, """ +
-                            # """<a href="http://www.riverbankcomputing.com/software/pyqt/download">PyQt</a>,"""+
-                            """<a href="http://matplotlib.org">matplotlib</a>,
-                            <a href="http://www.numpy.org">NumPy</a>,
-                            <a href="http://pandas.pydata.org">Pandas</a>,
-                            <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
-                            <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
-                            <br>""")
+        self.w = AboutPopup()
+        self.w.setGeometry(Qt.QRect(100, 100, 400, 200))
+        self.w.show()
 
-
-        about_box.exec()
+        # about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """
+        #                     """<h2>Fireweed</h2>
+        #                     Field, Reservoir and Well Electronic Dashboard<br><br>
+        #                     Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
+        #                     Sergey Farin</a><br><br>
+        #                     Powered by:
+        #                     <a href="https://www.python.org/">Python</a>,
+        #                     <a href="http://qt-project.org/wiki/PySide">PySide</a>, """ +
+        #                     # """<a href="http://www.riverbankcomputing.com/software/pyqt/download">PyQt</a>,"""+
+        #                     """<a href="http://matplotlib.org">matplotlib</a>,
+        #                     <a href="http://www.numpy.org">NumPy</a>,
+        #                     <a href="http://pandas.pydata.org">Pandas</a>,
+        #                     <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
+        #                     <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
+        #                     <br>""")
+        #
+        #
+        # about_box.exec()
 
 
 class RibbonTab(QtWidgets.QWidget):
@@ -96,6 +100,13 @@ class RibbonTab(QtWidgets.QWidget):
         return new_button
 
         # self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Fixed)
+
+class AboutPopup(QtWidgets.QWidget):
+    def __init__(self):
+        super(AboutPopup, self).__init__()
+        self.layout = QtWidgets.QVBoxLayout()
+        self.setLayout(self.layout)
+        self.layout.addWidget(QtWidgets.QLabel("rebrerbreb"))
 
 
 
