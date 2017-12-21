@@ -21,13 +21,8 @@ class Ribbon(QtWidgets.QFrame):
         self.ribbon_tabs.tabBar().setObjectName("RibbonTabBar")
         ribbon_layout.addWidget(self.ribbon_tabs)
         ribbon_layout.addItem(QtWidgets.QSpacerItem(0, 0))
-        # effect = Qt.QGraphicsDropShadowEffect()
-        # effect.setBlurRadius(3)
-        # effect.setXOffset(0)
-        # effect.setYOffset(2)
-        # # effect.
-        # # effect.setColor(Qt.Qt.black)
-        # self.setGraphicsEffect(effect)
+        # self.version = parent.version
+        # self.about()
 
     def add_tab(self, name):
         new_tab = RibbonTab(self, self.main_window)
@@ -38,9 +33,9 @@ class Ribbon(QtWidgets.QFrame):
         new_tab.layout.setContentsMargins(0, 0, 0, 0)
         new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 3))
         new_tab.layout0.addLayout(new_tab.layout)
-        new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 3))
+        new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 0))
         new_tab.layout.setAlignment(Qt.Qt.AlignLeft)
-        new_tab.layout.addItem(QtWidgets.QSpacerItem(15, 0))
+        new_tab.layout.addItem(QtWidgets.QSpacerItem(10, 0))
         new_tab.setLayout(new_tab.layout0)
         return new_tab
 
