@@ -24,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
             with open('main_window.qss') as qss:
                 self.setStyleSheet(qss.read())
 
-        self.setMinimumSize(500,400)
+        self.setMinimumSize(500, 400)
 
         layout_for_ribbon = QtWidgets.QVBoxLayout()
         layout_for_ribbon.setSpacing(0)
