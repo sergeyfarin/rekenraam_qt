@@ -32,7 +32,7 @@ class Ribbon(QtWidgets.QFrame):
         # self.layout.addWidget(info_button)
         parent.info_button.name = 'about'
         parent.info_button.resize(32, 32)
-        parent.info_button.move(self.width() - 32, 4)
+        parent.info_button.move(self.width() - 32, 0)
         # print(self.home_tab.height())
         # self.info_button.setStyleSheet('background-color:red;')
         parent.info_button.setParent(parent)

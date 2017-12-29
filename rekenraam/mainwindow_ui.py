@@ -26,48 +26,36 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.setMinimumSize(500, 400)
 
-        layout_for_ribbon = QtWidgets.QVBoxLayout()
-        layout_for_ribbon.setSpacing(0)
-        layout_for_ribbon.setContentsMargins(0, 0, 0, 0)
-        layout_for_left_pane = QtWidgets.QHBoxLayout()
-        layout_for_left_pane.setSpacing(0)
-        layout_for_left_pane.setContentsMargins(0, 0, 0, 0)
-        self.layout_main_pane = QtWidgets.QVBoxLayout()
-        self.layout_main_pane.setSpacing(0)
-        self.layout_main_pane.setContentsMargins(0, 0, 0, 0)
+        layout = QtWidgets.QGridLayout()
+        layout.setSpacing(0)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         self.ribbon = ribbon_ui.Ribbon(self)
         self.left_pane = QtWidgets.QWidget()
         self.main_area = QtWidgets.QWidget()
 
         central = QtWidgets.QWidget()
-        central.setLayout(layout_for_ribbon)
+        central.setLayout(layout)
         self.setCentralWidget(central)
-        layout_for_ribbon.addWidget(self.ribbon)
-        layout_for_ribbon.addLayout(layout_for_left_pane)
-        layout_for_left_pane.addWidget(self.left_pane)
-        layout_for_left_pane.addLayout(self.layout_main_pane)
-        self.layout_main_pane.addWidget(self.main_area)
+        layout.addWidget(self.ribbon, 0, 0, 1, 2)
+        layout.addWidget(self.left_pane, 1, 0, 1, 1)
+        layout.addWidget(self.main_area, 1, 1, 1, 1)
 
-        self.home_tab = self.ribbon.add_tab("Home")
-        self.extras_tab = self.ribbon.add_tab("Extras")
-        self.home_tab.home_button = self.home_tab.add_button("Data\n download", "Overview", "images/icons/dusk/icons8-home-64.png")
-        self.home_tab.home_button2 = self.home_tab.add_button("Home2\n", "Overview", "images/icons/dusk/icons8-Budget.png")
-        self.home_button3 = self.home_tab.add_button("Home3\n", "Overview", "images/icons/dusk/icons8-business-64.png")
-        self.investments_tab = self.ribbon.add_tab("Investments")
-        self.investments_tab2 = self.ribbon.add_tab("Investments2")
-        self.investments_tab3 = self.ribbon.add_tab("Investments3")
-
+        self.ribbon.home_tab = self.ribbon.add_tab("Home")
+        self.ribbon.extras_tab = self.ribbon.add_tab("Extras")
+        self.ribbon.home_tab.home_button = self.ribbon.home_tab.add_button("Data\n download", "Overview", "images/icons/dusk/icons8-home-64.png")
+        self.ribbon.home_tab.home_button2 = self.ribbon.home_tab.add_button("Home2\n", "Overview", "images/icons/dusk/icons8-Budget.png")
+        self.home_button3 = self.ribbon.home_tab.add_button("Home3\n", "Overview", "images/icons/dusk/icons8-business-64.png")
+        self.ribbon.investments_tab = self.ribbon.add_tab("Investments")
+        self.ribbon.investments_tab2 = self.ribbon.add_tab("Investments2")
+        self.ribbon.investments_tab3 = self.ribbon.add_tab("Investments3")
 
         self.left_pane.setFixedWidth(350)
         self.left_pane.setMinimumHeight(200)
         self.left_pane.setObjectName("LeftPane")
-
         self.main_area.setObjectName("MainArea")
 
         self.windowMapper = QtCore.QSignalMapper(self)
-        # noinspection PyUnresolvedReferences
-        # self.windowMapper.mapped.connect(self.set_active_sub_window)
 
         self.read_and_apply_window_settings()
         self.setUnifiedTitleAndToolBarOnMac(True)
@@ -88,9 +76,7 @@ class MainWindow(QtWidgets.QMainWindow):
         Called at QMainWindow initialization, before show().
         """
         qt_settings = QtCore.QSettings('Sergey.Farin', 'Rekenraam')
-        # No need for toPoint, etc. : PySide converts types
         self.restoreGeometry(qt_settings.value("geometry", self.saveGeometry()))
-        # self.restoreState(qt_settings.value("saveState", self.saveState()))
         position = qt_settings.value("pos", self.pos())
         if position.x() > (QtWidgets.QDesktopWidget().availableGeometry().width()*0.85):
             position.setX(max(0,
@@ -133,4 +119,4 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def resizeEvent(self, *args, **kwargs):
         self.write_window_settings()
-        self.info_button.move(self.width()-32, 4)
+        self.info_button.move(self.width()-32, 0)
