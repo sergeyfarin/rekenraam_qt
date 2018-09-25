@@ -1,3 +1,11 @@
+import os
+
+os.environ["PATH"] += ("C:\\Apps\\Programs\\miniconda3\\envs\\jupyter;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\mingw - w64\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\usr\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Scripts;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\bin;") + os.environ["PATH"]
 from PyQt5 import QtGui, QtCore, QtWidgets
 import ribbon_ui
 import os

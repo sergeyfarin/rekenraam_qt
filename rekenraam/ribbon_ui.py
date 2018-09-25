@@ -1,4 +1,12 @@
 __author__ = 'Sergey.Farin'
+import os
+
+os.environ["PATH"] += ("C:\\Apps\\Programs\\miniconda3\\envs\\jupyter;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\mingw - w64\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\usr\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Library\\bin;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\Scripts;" +
+                       "C:\\Apps\\Programs\\miniconda3\\envs\\jupyter\\bin;") + os.environ["PATH"]
 from PyQt5 import QtGui, QtCore, QtWidgets
 import mainwindow_ui
 
@@ -60,28 +68,28 @@ class Ribbon(QtWidgets.QFrame):
         return new_tab
 
     def about(self):
-        self.w = AboutPopup()
-        self.w.setGeometry(QtCore.QRect(100, 100, 400, 200))
-        self.w.show()
+        # self.w = AboutPopup()
+        # self.w.setGeometry(QtCore.QRect(100, 100, 400, 200))
+        # self.w.show()
 
-        # about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """
-        #                     """<h2>Fireweed</h2>
-        #                     Field, Reservoir and Well Electronic Dashboard<br><br>
-        #                     Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
-        #                     Sergey Farin</a><br><br>
-        #                     Powered by:
-        #                     <a href="https://www.python.org/">Python</a>,
-        #                     <a href="http://qt-project.org/wiki/PySide">PySide</a>, """ +
-        #                     # """<a href="http://www.riverbankcomputing.com/software/pyqt/download">PyQt</a>,"""+
-        #                     """<a href="http://matplotlib.org">matplotlib</a>,
-        #                     <a href="http://www.numpy.org">NumPy</a>,
-        #                     <a href="http://pandas.pydata.org">Pandas</a>,
-        #                     <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
-        #                     <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
-        #                     <br>""")
-        #
-        #
-        # about_box.exec()
+        about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """
+                            """<h2>Fireweed</h2>
+                            Field, Reservoir and Well Electronic Dashboard<br><br>
+                            Created by <a href="mailto:Sergey.Farin@gmail.com?Subject=Fireweed">
+                            Sergey Farin</a><br><br>
+                            Powered by:
+                            <a href="https://www.python.org/">Python</a>,
+                            <a href="http://qt-project.org/wiki/PySide">PySide</a>, """ +
+                            # """<a href="http://www.riverbankcomputing.com/software/pyqt/download">PyQt</a>,"""+
+                            """<a href="http://matplotlib.org">matplotlib</a>,
+                            <a href="http://www.numpy.org">NumPy</a>,
+                            <a href="http://pandas.pydata.org">Pandas</a>,
+                            <a href="https://code.google.com/p/pyodbc">PyODBC</a>,
+                            <a href="http://www.fatcow.com">FatCow</a> Fram-fresh icons</a>
+                            <br>""")
+
+
+        about_box.exec()
 
 
 class RibbonTab(QtWidgets.QWidget):
