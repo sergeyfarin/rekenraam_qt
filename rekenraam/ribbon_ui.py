@@ -1,5 +1,5 @@
 __author__ = 'Sergey.Farin'
-from PyQt5 import QtGui, QtCore, QtWidgets, Qt
+from PyQt5 import QtGui, QtCore, QtWidgets
 import mainwindow_ui
 
 class Ribbon(QtWidgets.QFrame):
@@ -31,16 +31,18 @@ class Ribbon(QtWidgets.QFrame):
         # info_button.setToolButtonStyle(QtCore.Qt.ToolButtonTextUnderIcon)
         # self.layout.addWidget(info_button)
         parent.info_button.name = 'about'
-        parent.info_button.resize(32, 32)
-        parent.info_button.move(self.width() - 32, 0)
+        parent.info_button.resize(24, 24)
+        parent.info_button.move(self.width() - 30, 6)
+        parent.info_button.move(10, 10)
+        # parent.info_button.raise()
         # print(self.home_tab.height())
         # self.info_button.setStyleSheet('background-color:red;')
         parent.info_button.setParent(parent)
-        parent.info_button.clicked.connect(self.about)
+        # parent.info_button.clicked.connect(self.about)
         parent.info_button.show()
 
-        # self.version = parent.version
-        # self.about()
+        self.version = parent.version
+        self.about()
 
     def add_tab(self, name):
         new_tab = RibbonTab(self, self.main_window)
@@ -52,14 +54,14 @@ class Ribbon(QtWidgets.QFrame):
         new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 3))
         new_tab.layout0.addLayout(new_tab.layout)
         new_tab.layout0.addItem(QtWidgets.QSpacerItem(0, 0))
-        new_tab.layout.setAlignment(Qt.Qt.AlignLeft)
+        new_tab.layout.setAlignment(QtCore.Qt.AlignLeft)
         new_tab.layout.addItem(QtWidgets.QSpacerItem(10, 0))
         new_tab.setLayout(new_tab.layout0)
         return new_tab
 
     def about(self):
         self.w = AboutPopup()
-        self.w.setGeometry(Qt.QRect(100, 100, 400, 200))
+        self.w.setGeometry(QtCore.QRect(100, 100, 400, 200))
         self.w.show()
 
         # about_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.NoIcon, "About Fireweed", # "" + self.version + """

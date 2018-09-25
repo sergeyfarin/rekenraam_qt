@@ -2,9 +2,6 @@
     /*font-size: 14px;*/
     /*!*font-family: Roboto;*!*/
 /*}*/
-/*QToolButton {
-    border: 0px;
-}*/
 QToolButton:hover {
     color: #1B5E20;
 }
@@ -13,14 +10,14 @@ QToolButton#InfoButton {
     border: 0px;
 }
 QToolButton:hover#InfoButton {
-    background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0, stop: 0 #43A047, stop: 0.95 #43A047, stop: 1.0 #1B5E20);
+    background-color: #43A047;
 }
 QWidget#Ribbon {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #1B5E20, stop: 0.5 #1B5E20, stop: 1.0 #1B5E20);
 }
 QTabWidget::tab-bar#RibbonTabs {
     left: 15px;
-}
+    }
 QTabWidget::pane#RibbonTabs {
     border-top: 0;
     border-left: 0;
@@ -31,7 +28,7 @@ QTabWidget::pane#RibbonTabs {
 QTabBar::scroller#RibbonTabBar {
     width: 15px;
 }
-/*QTabBar#RibbonTabBar QToolButton{
+QTabBar#RibbonTabBar QToolButton{
     background-color: #1B5E20;
     color: #FFFFFF;
     border: 0px;
@@ -43,7 +40,7 @@ QTabBar#RibbonTabBar QToolButton:hover {
 QTabBar#RibbonTabBar QToolButton:disabled {
     background-color: #1B5E20;
     color: #1B5E20;
-}*/
+}
 QTabBar::tab#RibbonTabBar {
     padding: 5px 10px 5px 10px;
     border: 0px;

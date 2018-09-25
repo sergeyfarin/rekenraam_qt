@@ -1,7 +1,6 @@
 """Main application file - creates application window"""
 
-from PyQt5 import QtCore, QtWidgets, Qt
-# noinspection PyUnresolvedReferences
+from PyQt5 import QtCore, QtWidgets
 import mainwindow_ui
 
 if __name__ == '__main__':
@@ -13,7 +12,9 @@ if __name__ == '__main__':
     # QtWidgets.QApplication.setAttribute(Qt.Qt.)
 
     app = QtWidgets.QApplication(sys.argv)
-    app.setStyle(QtWidgets.QStyleFactory.create("Fusion"))
+    # print(QtWidgets.QStyleFactory.keys())
+    FusionStyle = QtWidgets.QStyleFactory.create('Fusion')
+    app.setStyle(FusionStyle)
     QtCore.QCoreApplication.setApplicationName("Rekenraam")
     mainWin = mainwindow_ui.MainWindow()
     sys.exit(app.exec_())

@@ -1,5 +1,4 @@
 from PyQt5 import QtGui, QtCore, QtWidgets
-# noinspection PyUnresolvedReferences
 import ribbon_ui
 import os
 

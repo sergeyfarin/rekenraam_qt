@@ -2,10 +2,10 @@
 # dotpy.ir
 # iraj.jelo@gmail.com
 import sys
-from PyQt5 import QtWidgets, QtGui
-from PyQt5.QtCore import Qt
+from PySide2 import QtWidgets, QtGui
+from PySide2.QtCore import Qt
 import qtawesome as qta
-from PyQt5 import QtWinExtras
+# from PySide2 import QtWinExtras
 
 
 class TitleBar(QtWidgets.QDialog):
